@@ -1,0 +1,46 @@
+﻿<Window x:Class="MusicCollective.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Музыкальный коллектив" Height="600" Width="1000"
+        Background="White" WindowStartupLocation="CenterScreen">
+
+    <DockPanel>
+        <!-- Верхняя панель меню -->
+        <StackPanel Orientation="Horizontal" Background="#f0f0f0" Height="50" DockPanel.Dock="Top" VerticalAlignment="Top">
+            <Button Content="Концерты" Click="Concerts_Click" Style="{StaticResource TopMenuButtonStyle}"/>
+            <Button Content="Репетиции" Click="Rehearsals_Click" Style="{StaticResource TopMenuButtonStyle}"/>
+            <Button Content="Участники" Click="Members_Click" Style="{StaticResource TopMenuButtonStyle}"/>
+            <Button Content="Репертуар" Click="Repertoire_Click" Style="{StaticResource TopMenuButtonStyle}"/>
+            <Button Content="Отчёты" Click="Reports_Click" Style="{StaticResource TopMenuButtonStyle}"/>
+        </StackPanel>
+
+        <!-- Рабочая область -->
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Background="White"/>
+    </DockPanel>
+
+    <Window.Resources>
+        <Style x:Key="TopMenuButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="10,10,0,10"/>
+            <Setter Property="Padding" Value="15,5"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#d0d0d0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+</Window>

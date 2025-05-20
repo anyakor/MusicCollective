@@ -1,0 +1,35 @@
+﻿ <!-- Объявление страницы с указанием класса и пространств имен -->
+    <Page x:Class="MusicCollective.Pages.ConcertsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="White">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Первая строка подстраивается под содержимое -->
+            <RowDefinition Height="*"/>
+            <!-- Вторая строка занимает всё оставшееся пространство -->
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Button Content="Добавить" Click="Add_Click" Width="100" Margin="0,0,10,0"/>
+            <Button Content="Редактировать" Click="Edit_Click" Width="100" Margin="0,0,10,0"/>
+            <Button Content="Удалить" Click="Delete_Click" Width="100"/>
+        </StackPanel>
+
+        <!--для отображения списка концертов-->
+        <DataGrid x:Name="ConcertsGrid" 
+                  Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Binding="{Binding name}" Width="2*"/>
+                <DataGridTextColumn Header="Дата" Binding="{Binding date}" Width="*" />
+                <DataGridTextColumn Header="Место" Binding="{Binding location}" Width="2*"/>
+                <DataGridTextColumn Header="Программа" Binding="{Binding program}" Width="3*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
