@@ -2,6 +2,7 @@
 using System.Windows;
 using MySql.Data.MySqlClient;
 using System.Configuration;
+using System.Linq;
 
 namespace MusicCollective.Windows
 {
@@ -29,9 +30,32 @@ namespace MusicCollective.Windows
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            // Валидация обязательных полей
             if (string.IsNullOrWhiteSpace(LastNameBox.Text))
             {
                 MessageBox.Show("Фамилия обязательна.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(InstrumentBox.Text))
+            {
+                MessageBox.Show("Укажите инструмент.");
+                return;
+            }
+
+            
+            string phone = PhoneBox.Text.Trim();
+            if (!string.IsNullOrWhiteSpace(phone) && (phone.Length < 7 || !phone.All(char.IsDigit)))
+            {
+                MessageBox.Show("Телефон должен содержать не менее 7 цифр и состоять только из цифр.");
+                return;
+            }
+
+            
+            string email = EmailBox.Text.Trim();
+            if (!string.IsNullOrWhiteSpace(email) && !email.Contains("@"))
+            {
+                MessageBox.Show("Некорректный адрес электронной почты.");
                 return;
             }
 
@@ -50,17 +74,19 @@ namespace MusicCollective.Windows
                     cmd.Parameters.AddWithValue("@id", editingRow["id_member"]);
                 }
 
-                cmd.Parameters.AddWithValue("@l", LastNameBox.Text);
-                cmd.Parameters.AddWithValue("@f", FirstNameBox.Text);
-                cmd.Parameters.AddWithValue("@p", PatronymicBox.Text);
-                cmd.Parameters.AddWithValue("@i", InstrumentBox.Text);
-                cmd.Parameters.AddWithValue("@ph", PhoneBox.Text);
-                cmd.Parameters.AddWithValue("@e", EmailBox.Text)
+                cmd.Parameters.AddWithValue("@l", LastNameBox.Text.Trim());
+                cmd.Parameters.AddWithValue("@f", FirstNameBox.Text.Trim());
+                cmd.Parameters.AddWithValue("@p", PatronymicBox.Text.Trim());
+                cmd.Parameters.AddWithValue("@i", InstrumentBox.Text.Trim());
+                cmd.Parameters.AddWithValue("@ph", phone);
+                cmd.Parameters.AddWithValue("@e", email);
+
                 cmd.ExecuteNonQuery();
             }
 
             DialogResult = true;
             Close();
         }
+
     }
 }

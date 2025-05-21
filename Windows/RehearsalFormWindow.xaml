@@ -1,0 +1,36 @@
+﻿<Window x:Class="MusicCollective.Windows.RehearsalFormWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Репетиция" Height="350" Width="450" WindowStartupLocation="CenterOwner">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="Дата:" Width="100"/>
+            <DatePicker x:Name="DatePicker" Width="150"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,0,0,10">
+            <TextBlock Text="Время:" Width="100"/>
+            <TextBox x:Name="TimeBox" Width="150" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,0,0,10">
+            <TextBlock Text="Место:" Width="100"/>
+            <TextBox x:Name="LocationBox" Width="250"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,0,0,10">
+            <TextBlock Text="Состав:" Width="100"/>
+            <ComboBox x:Name="EnsembleCombo" Width="250" DisplayMemberPath="name" SelectedValuePath="id_ensemble"/>
+        </StackPanel>
+
+        <Button Grid.Row="4" Content="Сохранить" Width="120" Height="35" HorizontalAlignment="Right" Click="Save_Click"/>
+    </Grid>
+</Window>
